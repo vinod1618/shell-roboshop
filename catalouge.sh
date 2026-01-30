@@ -63,7 +63,7 @@ VALIDATE $? "entering into app directory"
 npm install 
 VALIDATE $? "installing dependency libraries"
 
-cp $PWD/catalouge.service /etc/systemd/system/catalogue.service
+cp $SCRIPT_DIREC/catalouge.service /etc/systemd/system/catalogue.service
 VALIDATE $? "created system control service"
 
 systemctl daemon-reload
