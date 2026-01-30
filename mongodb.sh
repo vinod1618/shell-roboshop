@@ -25,17 +25,17 @@ VALIDATE(){
 }
 
 cp mongo.repo /etc/yum.repos.d/mongo.repo
-Validate $? "copying mongorepo"
+VALIDATE $? "copying mongorepo"
 dnf install mongodb-org -y 
-Validate $? "installing mongodb server"
+VALIDATE $? "installing mongodb server"
 systemctl enable mongod
-Validate $? "Enable mongo DB"
+VALIDATE $? "Enable mongo DB"
 systemctl start mongod
-Validate $? "start mongo DB"
+VALIDATE $? "start mongo DB"
 
 sed -i 's/127.0.0.1/0.0.0.0/g' /etc/momgod.conf
-Validate $?  "Allowing remote connections"
+VALIDATE $?  "Allowing remote connections"
 
 systemctl restart mongod
-Validate $? "Restarted mongo db"
+VALIDATE $? "Restarted mongo db"
 
