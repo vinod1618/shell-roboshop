@@ -13,7 +13,7 @@ do
    --query 'Instances[0].InstanceId' \
    --output text)
 
-           if ( $instance == "frontend" )
+           if ( $instance == "frontend" ); then
                 ip=$(aws ec2 describe-Instances \
                 --instance-ids $tance_id \
                 --query 'Reservations[]. Instances [].PublicIpAddress' \
