@@ -23,25 +23,25 @@ VALIDATE(){
         echo -e "$2 ... $G SUCCESS $N" | tee -a $LOGS_FILE
     fi
 }
-dnf module disable nodejs -y
+dnf module disable nodejs -y &>>$LOGS_FILE
 VALIDATE $? "Disabling noeje default"
 
-dnf module enable nodejs:20 -y
+dnf module enable nodejs:20 -y  >>$LOGS_FILE
 VALIDATE $? "Enabling node js 20"
 
-dnf install nodejs -y
+dnf install nodejs -y  >>$LOGS_FILE
 VALIDATE $? "Installing nodejs 20"
 
 id roboshop $>>$LOGS_FILE
  if [ $? -ne 0]; then
-  useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
+  useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop  >>$LOGS_FILE
   VALIDATE $? "Creating system user"
  else
   echo "roboshop user already exists $Y skipping $Y"
  fi
 
-mkdir -p /app 
+mkdir -p /app  >>$LOGS_FILE
 VALIDATE $? "Creating app directory"
 
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip 
+curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip  >>$LOGS_FILE
 VALIDATE $? "Downloading the catalouge code"
