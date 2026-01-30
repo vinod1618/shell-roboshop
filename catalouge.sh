@@ -49,6 +49,9 @@ VALIDATE $? "Downloading the catalouge code"
 cd /app 
 VALIDATE $? "entering into app directory"
 
+rm -rf /app/*
+VALIDATE $? "Removing the existing code"
+
 unzip /tmp/catalogue.zip
 VALIDAT VALIDATE $? "unzip the code"
 
