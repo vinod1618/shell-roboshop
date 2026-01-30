@@ -24,6 +24,7 @@ do
                 --instance-ids $instance_id \
                 --query 'Reservations []. Instances [].PublicIpAddress' \
                 --output text)
-fi
+            fi
+            echo "Ip address:$ip"
 
 done
