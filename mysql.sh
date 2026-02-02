@@ -7,8 +7,6 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-SCRIPT_DIREC=$PWD
-MONGO_DB_HOST=mongodb.vinoddevops.online
 
 if [ $USERID -ne 0 ]; then
     echo -e "$R Please run this script with root user access $N" | tee -a $LOGS_FILE
@@ -26,12 +24,13 @@ VALIDATE(){
     fi
 }
 
-dnf install mysql-server -y
-VALIDATE $? "mysql server installation"
+dnf install mysql-server -y &>>$LOGS_FILE
+VALIDATE $? "Install MySQL server"
 
-systemctl enable mysqld
+systemctl enable mysqld &>>$LOGS_FILE
 systemctl start mysqld  
-VALIDATE $? "enabling and starting the my sql"
+VALIDATE $? "Enable and start mysql"
 
+# get the password from user
 mysql_secure_installation --set-root-pass RoboShop@1
-VALIDATE $? "setup root password"
+VALIDATE $? "Setup root password"
